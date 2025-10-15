@@ -81,9 +81,17 @@ def get_user_favorites(user_id):
     print(user)
     if user is None:
         return jsonify({"msg": "Usuario no encontrado"}), 404
+    
+    registros_favoritos = user.favorites
+    favorite_characters_serialized = []
 
-    favorites = user.favorites
-    return jsonify({"msg": "Favoritos del usuario", "favorites": [f.serialize() for f in favorites]}), 200
+    for registro in registros_favoritos:
+        character = registro.character.serialize()
+    
+    print(registros_favoritos[1].character.serialize())
+    return jsonify({"msg": "Todo salio bien",
+                    'favorite_characters': favorite_characters_serialized,
+                     'user': user.serialize() }), 200
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
