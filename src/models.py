@@ -44,6 +44,15 @@ class Characters(db.Model):
 
     def __repr__(self):
         return f'<Personaje {self.name}>'
+    
+    def serialiaze(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "height": self.height,
+            "weight": self.weight
+        }
+
 
 
 class FavoritesCharacters(db.Model):
@@ -61,7 +70,7 @@ class FavoritesCharacters(db.Model):
 
     def __repr__(self):
         return f'Al usuario {self.user.id} le gusta el personaje {self.character.name}'
-
+    
 
 class Planets(db.Model):
     __tablename__ = 'planets'
